@@ -1,112 +1,129 @@
-# 🛡️ Python Network Scanner
+# Python Nettverksskanner
 
-A simple automated network scanner built in Python using `nmap` and the `python-nmap` library.  
-This project is part of my cybersecurity learning journey, focusing on practical tooling, network analysis, and Python automation.
-
----
-
-## 🚀 Features
-
-- Runs an Nmap scan directly from Python
-- Shows open ports and detected services
-- CLI arguments for flexible usage (`--target`, `--ports`)
-- Works on local and remote targets
-- Beginner-friendly, clean code structure
+En enkel og praktisk nettverksskanner skrevet i Python, bygget for læring innen cybersikkerhet.
+Prosjektet demonstrerer hvordan man bruker Python sammen med `nmap` til å skanne både egen PC og andre enheter på hjemmenettverket.
 
 ---
 
-## 📦 Requirements
+## Funksjoner
 
-Before running the scanner, make sure you have:
-
-- **Python 3+**
-- **Nmap** installed and added to your system PATH  
-  Download here: https://nmap.org/download.html  
-- Python dependency:
-
+* Skanner mål-IP for åpne porter og tjenester
+* Bruker `python-nmap` for integrasjon med Nmap
+* CLI-argumenter: `--target`, `--ports`
+* Kan skanne deg selv (localhost) eller valgfri enhet
+* Lett å utvide med flere sikkerhetsfunksjoner
 
 ---
 
-## ⚙️ Installation
+## Krav
 
-Create and activate a virtual environment:
+For å bruke verktøyet trenger du:
+
+* **Python 3**
+* **Nmap installert** (må ligge i PATH)
+  Last ned her: [https://nmap.org/download.html](https://nmap.org/download.html)
+* Avhengigheter installert via `requirements.txt`
+
+---
+
+## Installering og oppstart
+
+### Klon prosjektet
+
+```bash
+git clone https://github.com/<brukernavn>/<repo-navn>.git
+cd <repo-navn>
+```
+
+### Opprett og aktiver virtuelt miljø
 
 ```bash
 python -m venv venv
-venv\Scripts\activate        # Windows
-# or
-source venv/bin/activate     # macOS / Linux
+```
 
+**Windows:**
+
+```bash
+venv\Scripts\activate
+```
+
+**Mac/Linux:**
+
+```bash
+source venv/bin/activate
+```
+
+### Installer avhengigheter
+
+```bash
 pip install -r requirements.txt
+```
 
-🕹️ Usage
-🔍 Basic scan (localhost)
+### Start scanneren
+
+#### Standard skanning (localhost)
+
+```bash
 python -m scanner.scanner
+```
 
-🎯 Scan a specific target
-python -m scanner.scanner --target 192.168.1.10
+Dette skanner din egen PC (127.0.0.1).
 
-🔧 Scan a custom port range
-python -m scanner.scanner --target 192.168.1.10 --ports 1-65535
+#### Skann en annen enhet
 
-Short version
-python -m scanner.scanner -t 127.0.0.1 -p 80,443
+```bash
+python -m scanner.scanner --target 192.168.4.186
+```
 
-⚠️ Legal Notice
+#### Skann tilpasset portområde
 
-This tool is intended for educational and authorized use only.
-Never scan networks or systems you do not own or have explicit permission to test.
-
-📚 Roadmap (Future Improvements)
-
-Save scan results to JSON/CSV
-
-Add basic vulnerability indicators (e.g., “Port 22 open → SSH service”)
-
-Faster scanning (multiple threads)
-
-Exportable scan reports (HTML/PDF)
-
-Web dashboard or GUI
-
-Scheduled recurring scans
-
-✨ About This Project
-
-This tool is part of my personal learning project in cybersecurity.
-It helps me practice:
-
-Network scanning
-
-Python automation
-
-Security tooling
-
-Git & GitHub workflow
-
-Building real tools from scratch
-
-Feel free to explore, fork, or contribute!
-
+```bash
+python -m scanner.scanner --target 192.168.4.186 --ports 1-65535
+```
 
 ---
 
-# 🎉 Ferdig!
+## Eksempler på resultater
 
-Denne README-en er:
+### Eksempel: Skanning av egen PC
 
-✔ Ryddig  
-✔ Fullstendig  
-✔ Uten feil formatering  
-✔ Perfekt for GitHub  
+```
+[+] Starting scan against 127.0.0.1 on ports 1-1024
+
+Host: 127.0.0.1 (localhost)
+State: up
+
+Protocol: tcp
+  Port: 135     State: open     Service: msrpc
+  Port: 137     State: filtered Service: netbios-ns
+  Port: 445     State: open     Service: microsoft-ds
+```
+
+### Eksempel: Skanning av en IoT-enhet
+
+```
+Host is up (0.010s latency)
+
+PORT     STATE SERVICE         VERSION
+80/tcp   open  http            nginx
+8008/tcp open  http
+8009/tcp open  ajp13
+8443/tcp open  https-alt
+9000/tcp open  cslistener
+9080/tcp open  glrpc
+```
 
 ---
 
-## Vil du gjøre neste steg?
+## Om prosjektet
 
-**Leksjon 3:** Lagre scan-resultater til JSON eller CSV  
-(veldig nyttig for security analysis)
+Dette er et læringsprosjekt i cybersikkerhet, med fokus på:
 
-Bare skriv:
+* Nettverksanalyse
+* Python-automatisering
+* Git/GitHub-workflow
+* Forståelse av lavnivå sikkerhetsverktøy
 
-👉 **“klar for neste”**
+Prosjektet er perfekt for portefølje og videre utvikling!
+
+Det er viktig at dette prosjektet kun  blir brukt til lovlige tester. Uautorisert portskanning kan være ulovlig!
